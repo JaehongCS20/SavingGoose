@@ -25,7 +25,7 @@ class AudioFragment: Fragment(), GooseClassifier.DetectorListener {
     // views
     lateinit var snapView: TextView
 
-    private var CameraInterval = 0
+    private var cameraInterval = 10
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,18 +63,17 @@ class AudioFragment: Fragment(), GooseClassifier.DetectorListener {
                 snapView.text = "GOOSE"
                 snapView.setBackgroundColor(ProjectConfiguration.activeBackgroundColor)
                 snapView.setTextColor(ProjectConfiguration.activeTextColor)
-                if(CameraInterval == 0)
+                if(cameraInterval <= 0)
                     (activity as MainActivity?)!!.addCamera()
-                CameraInterval = 100
+                cameraInterval = 100
 
             } else {
                 snapView.text = "NO GOOSE"
                 snapView.setBackgroundColor(ProjectConfiguration.idleBackgroundColor)
                 snapView.setTextColor(ProjectConfiguration.idleTextColor)
-                if(CameraInterval == 0)
+                if(cameraInterval == 0)
                     (activity as MainActivity?)!!.deleteCamera()
-                else
-                    CameraInterval--
+                cameraInterval--
             }
         }
     }
