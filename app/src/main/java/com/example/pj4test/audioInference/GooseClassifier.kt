@@ -100,7 +100,7 @@ class GooseClassifier {
         Log.d(TAG, output.toString())
 
         return output[0].categories.find { it.label == "Duck" ||
-                it.label == "Quack" || it.label == "Goose" }!!.score
+                it.label == "Quack" || it.label == "Goose" || it.label == "Bird" }!!.score
     }
 
     fun startInferencing() {
@@ -148,7 +148,7 @@ class GooseClassifier {
      * @property    THRESHOLD           threshold of the score to classify sound as a horn sound
      */
     companion object {
-        const val TAG = "HornClassifier"
+        const val TAG = "GooseClassifier"
 
         const val REFRESH_INTERVAL_MS = 33L
         const val YAMNET_MODEL = "yamnet_classification.tflite"

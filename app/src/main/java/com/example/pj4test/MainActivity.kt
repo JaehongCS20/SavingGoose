@@ -18,11 +18,14 @@ class MainActivity : AppCompatActivity() {
     private val permissions = arrayOf(RECORD_AUDIO, CAMERA)
     private val PERMISSIONS_REQUEST = 0x0000001;
 
+    private val manager = supportFragmentManager
+    private var camera = manager.findFragmentById(R.id.cameraFragmentContainerView)
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        camera = manager.findFragmentById(R.id.cameraFragmentContainerView)
         checkPermissions() // check permissions
     }
 
@@ -32,6 +35,26 @@ class MainActivity : AppCompatActivity() {
         }
         else{
             requestPermissions(permissions, PERMISSIONS_REQUEST)
+        }
+    }
+
+    public fun addCamera() {
+        val fragment = camera
+        val transaction = manager.beginTransaction()
+        if(fragment != null) {
+            transaction.add(R.id.cameraFragmentContainerView, fragment)
+            transaction.commit()
+            Log.d(TAG, "Camera Start")
+        }
+    }
+
+    public fun deleteCamera() {
+        val fragment = camera
+        val transaction = manager.beginTransaction()
+        if(fragment != null) {
+            transaction.remove(fragment)
+            transaction.commit()
+            Log.d(TAG, "Camera End")
         }
     }
 }

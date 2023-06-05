@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.pj4test.MainActivity
 import com.example.pj4test.ProjectConfiguration
 import com.example.pj4test.audioInference.GooseClassifier
 import com.example.pj4test.databinding.FragmentAudioBinding
@@ -23,6 +24,8 @@ class AudioFragment: Fragment(), GooseClassifier.DetectorListener {
 
     // views
     lateinit var snapView: TextView
+
+    private var CameraInterval = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,10 +63,18 @@ class AudioFragment: Fragment(), GooseClassifier.DetectorListener {
                 snapView.text = "GOOSE"
                 snapView.setBackgroundColor(ProjectConfiguration.activeBackgroundColor)
                 snapView.setTextColor(ProjectConfiguration.activeTextColor)
+                if(CameraInterval == 0)
+                    (activity as MainActivity?)!!.addCamera()
+                CameraInterval = 100
+
             } else {
                 snapView.text = "NO GOOSE"
                 snapView.setBackgroundColor(ProjectConfiguration.idleBackgroundColor)
                 snapView.setTextColor(ProjectConfiguration.idleTextColor)
+                if(CameraInterval == 0)
+                    (activity as MainActivity?)!!.deleteCamera()
+                else
+                    CameraInterval--
             }
         }
     }
