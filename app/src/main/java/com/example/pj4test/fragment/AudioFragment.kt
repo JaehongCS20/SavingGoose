@@ -25,7 +25,7 @@ class AudioFragment: Fragment(), GooseClassifier.DetectorListener {
     // views
     lateinit var snapView: TextView
 
-    private var cameraInterval = 10
+    private var cameraInterval = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,

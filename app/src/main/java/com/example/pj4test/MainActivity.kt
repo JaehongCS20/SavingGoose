@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import com.example.pj4test.fragment.CameraFragment
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -40,20 +41,16 @@ class MainActivity : AppCompatActivity() {
 
     public fun addCamera() {
         val fragment = camera
-        val transaction = manager.beginTransaction()
         if(fragment != null) {
-            transaction.add(R.id.cameraFragmentContainerView, fragment)
-            transaction.commit()
+            (fragment as CameraFragment?)!!.setUpCamera()
             Log.d(TAG, "Camera Start")
         }
     }
 
     public fun deleteCamera() {
         val fragment = camera
-        val transaction = manager.beginTransaction()
         if(fragment != null) {
-            transaction.remove(fragment)
-            transaction.commit()
+            (fragment as CameraFragment?)!!.unSetCamera()
             Log.d(TAG, "Camera End")
         }
     }

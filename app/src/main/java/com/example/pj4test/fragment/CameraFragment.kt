@@ -101,7 +101,7 @@ class CameraFragment : Fragment(), CatClassifier.DetectorListener {
     }
 
     // Initialize CameraX, and prepare to bind the camera use cases
-    private fun setUpCamera() {
+    fun setUpCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener(
             {
@@ -110,6 +110,20 @@ class CameraFragment : Fragment(), CatClassifier.DetectorListener {
 
                 // Build and bind the camera use cases
                 bindCameraUseCases(cameraProvider)
+            },
+            ContextCompat.getMainExecutor(requireContext())
+        )
+    }
+
+    fun unSetCamera() {
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
+        cameraProviderFuture.addListener(
+            {
+                // CameraProvider
+                val cameraProvider = cameraProviderFuture.get()
+
+                // Build and bind the camera use cases
+                cameraProvider.unbindAll()
             },
             ContextCompat.getMainExecutor(requireContext())
         )
