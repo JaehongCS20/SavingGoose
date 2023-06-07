@@ -2,6 +2,7 @@ package com.example.pj4test
 
 import android.Manifest.permission.CAMERA
 import android.Manifest.permission.RECORD_AUDIO
+import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -22,12 +23,16 @@ class MainActivity : AppCompatActivity() {
     private val manager = supportFragmentManager
     private var camera = manager.findFragmentById(R.id.cameraFragmentContainerView)
 
+    private lateinit var alertDialog: AlertDialog
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         camera = manager.findFragmentById(R.id.cameraFragmentContainerView)
         checkPermissions() // check permissions
+        alertDialog = AlertDialog.Builder(this).setTitle("ALERT: Goose In Danger!!")
+            .setMessage("Remove cat from the duck").create()
     }
 
     private fun checkPermissions() {
@@ -53,5 +58,13 @@ class MainActivity : AppCompatActivity() {
             (fragment as CameraFragment?)!!.unSetCamera()
             Log.d(TAG, "Camera End")
         }
+    }
+
+    public fun alert() {
+        alertDialog.show()
+    }
+
+    public fun alertDismiss(){
+        alertDialog.dismiss()
     }
 }

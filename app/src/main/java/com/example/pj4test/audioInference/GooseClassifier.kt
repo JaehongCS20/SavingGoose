@@ -100,7 +100,7 @@ class GooseClassifier {
         Log.d(TAG, output.toString())
 
         return output[0].categories.find { it.label == "Duck" ||
-                it.label == "Quack" || it.label == "Goose" || it.label == "Bird" }!!.score
+                it.label == "Quack" || it.label == "Goose"}!!.score
     }
 
     fun startInferencing() {

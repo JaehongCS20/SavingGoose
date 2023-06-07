@@ -35,6 +35,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.pj4test.MainActivity
 import com.example.pj4test.ProjectConfiguration
 import java.util.LinkedList
 import java.util.concurrent.ExecutorService
@@ -61,6 +62,8 @@ class CameraFragment : Fragment(), CatClassifier.DetectorListener {
 
     /** Blocking camera operations are performed using this executor */
     private lateinit var cameraExecutor: ExecutorService
+
+    private var alertInterval = 0
 
     override fun onDestroyView() {
         _fragmentCameraBinding = null
@@ -222,10 +225,12 @@ class CameraFragment : Fragment(), CatClassifier.DetectorListener {
                 personView.text = "CAT"
                 personView.setBackgroundColor(ProjectConfiguration.activeBackgroundColor)
                 personView.setTextColor(ProjectConfiguration.activeTextColor)
+                (activity as MainActivity?)!!.alert()
             } else {
                 personView.text = "NO CAT"
                 personView.setBackgroundColor(ProjectConfiguration.idleBackgroundColor)
                 personView.setTextColor(ProjectConfiguration.idleTextColor)
+                (activity as MainActivity?)!!.alertDismiss()
             }
 
             // Force a redraw
