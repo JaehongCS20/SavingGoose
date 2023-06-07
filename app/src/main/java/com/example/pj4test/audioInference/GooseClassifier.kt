@@ -117,6 +117,16 @@ class GooseClassifier {
         task = null
     }
 
+    fun slowInferencing() {
+        task?.cancel()
+        task = null
+
+        task = Timer().scheduleAtFixedRate(0, 10L) {
+            val score = inference()
+            detectorListener?.onResults(score)
+        }
+    }
+
     /**
      * interface DetectorListener
      *
