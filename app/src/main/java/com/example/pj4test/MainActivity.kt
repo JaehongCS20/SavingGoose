@@ -8,6 +8,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.example.pj4test.fragment.CameraFragment
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         camera = manager.findFragmentById(R.id.cameraFragmentContainerView)
         checkPermissions() // check permissions
         alertDialog = AlertDialog.Builder(this).setTitle("ALERT: Goose In Danger!!")

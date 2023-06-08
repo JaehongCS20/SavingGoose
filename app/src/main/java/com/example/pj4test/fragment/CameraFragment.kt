@@ -218,10 +218,10 @@ class CameraFragment : Fragment(), CatClassifier.DetectorListener {
             )
             
             // find at least one bounding box of the person
-            val isPersonDetected: Boolean = results!!.find { it.categories[0].label == "cat" } != null
+            val isCatDetected: Boolean = results!!.find { it.categories[0].label == "cat" } != null
             
             // change UI according to the result
-            if (isPersonDetected) {
+            if (isCatDetected) {
                 personView.text = "CAT"
                 personView.setBackgroundColor(ProjectConfiguration.activeBackgroundColor)
                 personView.setTextColor(ProjectConfiguration.activeTextColor)
