@@ -121,7 +121,17 @@ class GooseClassifier {
         task?.cancel()
         task = null
 
-        task = Timer().scheduleAtFixedRate(0, 10L) {
+        task = Timer().scheduleAtFixedRate(33L, 66L) {
+            val score = inference()
+            detectorListener?.onResults(score)
+        }
+    }
+
+    fun fastInferencing() {
+        task?.cancel()
+        task = null
+
+        task = Timer().scheduleAtFixedRate(66L, 33L) {
             val score = inference()
             detectorListener?.onResults(score)
         }

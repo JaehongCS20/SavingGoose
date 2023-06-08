@@ -64,9 +64,8 @@ class AudioFragment: Fragment(), GooseClassifier.DetectorListener {
                 snapView.setBackgroundColor(ProjectConfiguration.activeBackgroundColor)
                 snapView.setTextColor(ProjectConfiguration.activeTextColor)
                 if(cameraInterval <= 0) {
+                    gooseClassifier.fastInferencing()
                     (activity as MainActivity?)!!.addCamera()
-                    gooseClassifier.stopInferencing()
-                    gooseClassifier.startInferencing()
                 }
                 cameraInterval = 100
 
@@ -75,8 +74,8 @@ class AudioFragment: Fragment(), GooseClassifier.DetectorListener {
                 snapView.setBackgroundColor(ProjectConfiguration.idleBackgroundColor)
                 snapView.setTextColor(ProjectConfiguration.idleTextColor)
                 if(cameraInterval == 0) {
-                    (activity as MainActivity?)!!.deleteCamera()
                     gooseClassifier.slowInferencing()
+                    (activity as MainActivity?)!!.deleteCamera()
                 }
                 cameraInterval--
             }
